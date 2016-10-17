@@ -1,0 +1,80 @@
+  <div class="row">
+    <div class="col-md-9">
+
+      <!-- <div class="row carousel-holder">
+
+        <div class="col-md-12" style="height:300px;">
+          <legend>Recently Viewed Videos</legend>
+          <uib-carousel>
+            <uib-slide style="height:200px;" ng-repeat="video in videos | orderBy:'currentRating':true | unique:'url' | limitTo:5">
+              <video id="top_{{$index}}" controls>
+                  <source src="{{video.url | videoEmbedUrl}}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+            </uib-slide>
+          </uib-carousel>
+        </div>
+
+      </div> -->
+
+      <div class="row" style="padding-bottom:20px;">
+        <div class="col-md-12">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-question-sign"></span></button>
+            </span>
+            <input type="text" class="form-control" ng-model="searchQuery" placeholder="Start typing...">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div>
+
+      <div class="row" infinite-scroll='getVideos()' infinite-scroll-disabled='busy' infinite-scroll-distance='0'>
+        <div ng-repeat="video in videos | filter:searchQuery" finish-loading class="col-sm-6 col-lg-6 col-md-6 pull-left">
+          <div class="thumbnail">
+            <div class="video-container">
+            <video id="list-{{$index}}" controls>
+              <source src="{{video.url | videoEmbedUrl}}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            </div>
+            <div class="caption">
+              <h4><a ng-click="openVideo(video, $index)" href="#/detail/{{video._id}}">{{video.name}}</a></h4>
+              <p>{{video.description}}</p>
+            </div>
+            <div class="ratings">
+              <p>
+                <input-stars class="listClass" max="5" video-id="{{video._id}}" click-rating="updateRating(video._id, video.currentRating, $index)" ng-model="video.currentRating"></input-stars>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <p class="lead">Top Rated!</p>
+
+      <div class="row">
+        <div ng-repeat="video in videos | orderBy:'currentRating':true | unique:'url' | limitTo:5" finish-loading class="col-md-12">
+          <div class="thumbnail">
+            <div class="video-container-small">
+            <video id="top-{{$index}}" controls>
+              <source src="{{video.url | videoEmbedUrl}}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            </div>
+            <div class="caption">
+              <h4><a ng-click="openVideo(video, $index)" href="">{{video.name}} - {{video.currentRating}}</a></h4>
+              <p>{{video.description}}</p>
+            </div>
+            <div class="ratings">
+              <p>
+                <input-stars class="listClass" max="5" video-id="{{video._id}}" click-rating="updateRating(video._id, video.currentRating, $index)" ng-model="video.currentRating"></input-stars>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>

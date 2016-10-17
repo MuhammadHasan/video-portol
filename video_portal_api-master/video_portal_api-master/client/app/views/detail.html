@@ -1,0 +1,19 @@
+<!--<p>This is the detail view.</p>-->
+
+    <div style="height: 1000px" class="thumbnail">
+      <div style=" width:100%;">
+        <video id="list-{{$index}}" controls>
+          <source src="{{clickvideo.url | videoEmbedUrl}}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div style="margin-top: 200px" class="caption">
+        <h4>{{clickvideo.name}}</h4>
+        <p>{{clickvideo.description}}</p>
+      </div>
+      <div class="ratings">
+        <p>
+          <input-stars class="listClass" max="5" video-id="{{clickvideo._id}}" click-rating="updateRating(clickvideo._id, clickvideo.currentRating, $index)" ng-model="clickvideo.currentRating"></input-stars>
+        </p>
+      </div>
+    </div>
